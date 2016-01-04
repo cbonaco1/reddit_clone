@@ -1,0 +1,34 @@
+<h2>Post Info</h2>
+
+<table>
+<tr>
+  <th>Title</th>
+  <td><%= @post.title %></td>
+</tr>
+<tr>
+  <th>Author</th>
+  <td><%= @post.author.username %></td>
+</tr>
+
+<% unless @post.url.empty? %>
+<tr>
+  <th>URL</th>
+  <td><a href="<%= @post.url %>"></a></td>
+</tr>
+<% end %>
+
+<% unless @post.content.empty? %>
+<tr>
+  <th>Content</th>
+  <td><%= @post.content %></td>
+</tr>
+<% end %>
+
+</table>
+
+<% if current_user == @post.author %>
+<a href="<%= edit_post_url %>">Edit Post</a>
+<% end %>
+
+<!-- <a href="<%= sub_url(@post.subs) %>">Back To Sub</a><br> -->
+<a href="<%= subs_url %>">All Subs</a>

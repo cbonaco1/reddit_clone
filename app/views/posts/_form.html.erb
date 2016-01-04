@@ -1,0 +1,38 @@
+<% if action == :new %>
+  <% form_action = posts_url %>
+  <% form_method = "post" %>
+  <% button_message = "Add Post" %>
+<% elsif action == :edit %>
+  <% form_action = post_url(@post) %>
+  <% form_method = "patch" %>
+  <% button_message = "Update Post" %>
+<% end %>
+
+
+<form action="<%= form_action %>" method="post">
+  <%= authenticity_token %>
+  <input type="hidden" name="_method" value="<%= form_method %>">
+  <label>Title:
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+  </label>
+
+  <label>URL:
+    <input type="text" name="post[url]" value="<%= @post.url %>">
+  </label>
+
+  <label>Content:
+    <textarea name="post[content]" rows="4" cols="20"><%= @post.title %></textarea>
+  </label>
+
+  <label>Sub:
+    <% Sub.all.each do |s| %>
+    <input type="checkbox" name="post[sub_ids][]"
+      value="<%= s.id %>"
+      <%= "checked" if @post.subs.include?(s) %>>
+      <%= s.title %>
+    <% end %>
+  </label>
+
+  <button><%= button_message %></button>
+
+</form>
