@@ -8,17 +8,38 @@
 </head>
 <body>
 
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p> <%= error %> </p>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 <hr>
 
 <% if signed_in? %>
   <p><%= current_user.username %></p>
-  <%= button_to "Log Out", session_url, method: :delete %>
+  <form action="<%= session_url %>" method="post">
+    <%= authenticity_token %>
+    <input type="hidden" name="_method" value="delete">
+    <button>Log Out</button>
+  </form>
 <% else %>
-  <%= button_to "Sign In", new_session_url, method: :get %>
-  <%= button_to "Sign Up", new_user_url, method: :get %>
+  <form action="<%= new_session_url %>" method="post">
+    <input type="hidden" name="_method" value="get">
+    <%= authenticity_token %>
+    <button>Sign In</button>
+  </form>
+
+  <form action="<%= new_user_url %>" method="post">
+    <input type="hidden" name="_method" value="get">
+    <%= authenticity_token %>
+    <button>Sign Up</button>
+  </form>
+
 <% end %>
+
 
 </body>
 </html>

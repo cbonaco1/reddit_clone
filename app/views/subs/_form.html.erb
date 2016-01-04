@@ -1,0 +1,28 @@
+<% if @sub.persisted? %>
+  <% form_action = sub_url(@sub) %>
+  <% button_message = "Update Sub" %>
+  <% form_method = "patch" %>
+<% else %>
+  <% form_action = subs_url %>
+  <% button_message = "Create Sub" %>
+  <% form_method = "post" %>
+<% end %>
+
+<form action="<%= form_action %>" method="post">
+  <%= authenticity_token %>
+
+  <input type="hidden" name="_method" value=<%= form_method %>>
+
+  <label>Title
+    <input type="text" name="sub[title]" value="<%= @sub.title %>">
+  </label>
+
+  <label>Description
+    <textarea name="sub[description]" rows="8" cols="40"><%= @sub.description %></textarea>
+  </label>
+
+  <button>
+    <%= button_message %>
+  </button>
+
+</form>

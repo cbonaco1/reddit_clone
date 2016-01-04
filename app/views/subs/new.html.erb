@@ -1,16 +1,3 @@
 <h2>New Sub</h2>
 
-<form action="<%= subs_url %>" method="post">
-  <%= authenticity_token %>
-
-  <label>Title
-    <input type="text" name="sub[title]" value="<%= @sub.title %>">
-  </label>
-
-  <label>Description
-    <textarea name="sub[description]" rows="8" cols="40"><%= @sub.title %></textarea>
-  </label>
-
-  <button>Create Sub</button>
-
-</form>
+<%= render partial: 'form' %>

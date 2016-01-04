@@ -2,6 +2,8 @@
 
 <ul>
   <% @subs.each do |s| %>
-    <li><%= link_to s.title, sub_url(s) %></li>
+    <li><a href="<%= sub_url(s) %>"><%= s.title %></a></li>
   <% end %>
 </ul>
+
+<a href="<%= new_sub_url %>">Add Sub</a>
