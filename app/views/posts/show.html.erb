@@ -26,6 +26,24 @@
 
 </table>
 
+<h3>Comments</h3>
+<% @post.comments.where(parent_comment_id: nil).each do |comment| %>
+<!-- <p><a href="<%= comment_url(comment)%>"><%= comment.content %></a></p>
+<p><b> <%= comment.author.username %> </b></p> -->
+  <%= render 'comments/comments', comment: comment %>
+<% end %>
+
+<form action="<%= comments_url %>" method="post">
+  <%= authenticity_token %>
+  <input type="hidden" name="comment[post_id]" value="<%= @post.id %>">
+
+  <label>Comment
+    <textarea name="comment[content]" rows="4" cols="20"></textarea>
+  </label>
+
+  <button>Add Comment</button>
+</form>
+
 <% if current_user == @post.author %>
 <a href="<%= edit_post_url %>">Edit Post</a>
 <% end %>

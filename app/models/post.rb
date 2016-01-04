@@ -16,6 +16,13 @@ class Post < ActiveRecord::Base
     source: :sub
   )
 
+  has_many(
+    :comments,
+    class_name: "Comment",
+    foreign_key: :post_id,
+    primary_key: :id
+  )
+
   belongs_to(
     :author,
     class_name: "User",
