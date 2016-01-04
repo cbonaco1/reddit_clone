@@ -28,8 +28,6 @@
 
 <h3>Comments</h3>
 <% @post.comments.where(parent_comment_id: nil).each do |comment| %>
-<!-- <p><a href="<%= comment_url(comment)%>"><%= comment.content %></a></p>
-<p><b> <%= comment.author.username %> </b></p> -->
   <%= render 'comments/comments', comment: comment %>
 <% end %>
 
