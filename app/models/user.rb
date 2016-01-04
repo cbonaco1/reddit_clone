@@ -4,6 +4,20 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: { message: "Password cannot be blank" }
   after_initialize :ensure_session_token
 
+  has_many(
+    :subs,
+    :class_name => "Sub",
+    :foreign_key => :moderator_id,
+    :primary_key => :id
+  )
+
+  has_many(
+    :posts,
+    :class_name => "Post",
+    :foreign_key => :author_id,
+    :primary_key => :id
+  )
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

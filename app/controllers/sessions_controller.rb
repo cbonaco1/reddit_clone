@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     if user
       sign_in(user)
-      #redirect_to subs_url
+      redirect_to subs_url
     else
       flash.now[:errors] = ["Error logging in."]
       render :new
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out(current_user)
-    redirect_to new_session_url 
+    redirect_to new_session_url
   end
 
 end
