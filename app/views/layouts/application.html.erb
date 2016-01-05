@@ -19,7 +19,7 @@
 <hr>
 
 <% if signed_in? %>
-  <p><%= current_user.username %></p>
+  <p>Logged In as: <%= current_user.username %></p>
   <form action="<%= session_url %>" method="post">
     <%= authenticity_token %>
     <input type="hidden" name="_method" value="delete">
